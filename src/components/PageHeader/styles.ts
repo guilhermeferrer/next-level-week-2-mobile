@@ -19,6 +19,12 @@ export const Logo = styled.Image`
     resize-mode: contain;
 `;
 
+export const Header = styled.View`
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+`;
+
 export const Title = styled.Text`
     color: #fff;
     font-family: 'Archivo_700Bold';

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+
 import {
     Container,
     Banner,
@@ -17,6 +18,7 @@ import studyIcon from '../../assets/images/icons/study.png';
 import giveClassesIcon from '../../assets/images/icons/give-classes.png';
 import heartIcon from '../../assets/images/icons/heart.png';
 import { useNavigation } from '@react-navigation/core';
+import api from '../../services/api';
 
 export default function Landing() {
     const { navigate } = useNavigation();
@@ -28,6 +30,14 @@ export default function Landing() {
     function redirectToStudyPage() {
         navigate('Study');
     }
+
+    const [totalConnections, setTotalConnections] = useState(0);
+
+    useEffect(() => {
+        api.get('/connection').then(response => {
+            setTotalConnections(response.data.total);
+        });
+    }, []);
 
     return (
         <Container>
@@ -47,7 +57,7 @@ export default function Landing() {
                 </ButtonSecondary>
             </ButtonsContainer>
             <TotalConnections>
-                Total de 200 conexões já realizadas {' '}
+                Total de {totalConnections} conexões já realizadas {' '}
                 <Icon source={heartIcon} />
             </TotalConnections>
         </Container>
